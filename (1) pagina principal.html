@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funny Games Company</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #2c2929;
+      color: white;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #000;
+      color: white;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    .header .logo {
+      display: flex;
+      align-items: center;
+    }
+    .header .logo img {
+      width: 70px;
+      height: auto;
+      margin-right: 10px;
+    }
+    .header .menu {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    .header .menu li {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .header .menu li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .header .menu li a:hover {
+      color: #00f7ff; /* Un color de énfasis que contrasta */
+    }
+    .header .buttons {
+      display: flex;
+      gap: 20px;
+    }
+    .header .buttons a {
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      font-weight: bold;
+      color: white;
+      background-color: #000;
+      border: 2px solid #fff;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .header .buttons a:hover {
+      background-color: #00fff2;
+      color: black;
+    }
+    .main-content {
+      margin-top: 120px;
+      padding: 20px;
+      text-align: center;
+    }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background-color: #000;
+      color: #fff;
+      padding: 10px;
+    }
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #000000;
+      color: #00fff2;
+      padding: 20px;
+      box-shadow: 0px 4px 10px rgb(0, 0, 0);
+      border-radius: 10px;
+      display: none;
+      z-index: 2000;
+    }
+    .modal .color-option {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      margin: 5px;
+      border: 1px solid #000;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .color-option:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+    .color-option.naranja { background-color: yellow; }
+    .color-option.rojo { background-color: orange; }
+    .color-option.amarillo { background-color: red; }
+    .color-option.azul { background-color: blue; }
+    .color-option.verde { background-color: green; }
+    .color-option.morado { background-color: purple; }
+    .color-option.negro { background-color: rgb(252, 250, 250); }
+    .color-option.blanco { background-color: rgb(17, 17, 17); border: 1px solid #000; }
+    .modal-close {
+      margin-top: 20px;
+      padding: 5px 10px;
+      background-color: #000000;
+      color: #00fff2;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+/* Estilos responsive */
+    @media (max-width: 700px) {
+      .header .menu {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+      .header .menu li {
+        font-size: 18px;
+      }
+      .header .buttons {
+        flex-direction: center;
+        gap: 10px;
+      }
+    }
+/*nuevos estilos, eliminar si no sirve*/
+.main-content {
+    margin-top: 120px;
+    text-align: center;
+  }
+
+  .section-title {
+    text-align: center;
+    margin: 50px 0 20px;
+  }
+
+  .section-title h2 {
+    font-size: 36px;
+    color: #00fff2;
+    position: relative;
+  }
+
+  .section-title h2::before,
+  .section-title h2::after {
+    content: "";
+    display: inline-block;
+    width: 50px;
+    height: 3px;
+    background: #00fff2;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .section-title h2::before {
+    left: -60px;
+  }
+
+  .section-title h2::after {
+    right: -60px;
+  }
+
+  .section-title p {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .plans-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .plan-card {
+    background-color: #00fff2;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: black;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgb(0, 0, 0);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 15px rgb(0, 0, 0);
+  }
+
+  .plan-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .plan-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .plan-card ul {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .plan-card ul li {
+    margin-bottom: 10px;
+  }
+/*hasta aqui*/
+/*estilo de la animacion*/
+    /* Página principal para la animacion */
+    .mai {
+      display: none;
+      padding: 20px;
+      text-align: center;
+    }    
+/* Contenedor de la animación */
+    .animation-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000000; /* Fondo negro oscuro */
+      color: white;
+      flex-direction: column;
+      animation: fadeOut 1s ease 3s forwards;
+    }
+
+    /* Imagen en la animación - más grande */
+    .animation-container img {
+      width: 300px;  /* Ajusta el tamaño de la imagen a un tamaño más grande */
+      height: auto;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    /* Texto animado con color azul y sombra negra */
+    .animation-container h1 {
+      font-size: 3rem;
+      color: #3498db; /* Azul */
+      text-shadow: 2px 2px 4px #000000; /* Sombra negra */
+      animation: fadeIn 1.5s ease-in-out;
+    }
+/**/
+    /* Animaciones */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  </style>
+</head>
+<!-- Agregar favicon osea icono arriba en la pagina -->
+<link rel="icon" href="funny(2).jpeg" type="image/jpeg">
+<body>
+<!-- Contenedor de la animación -->
+  <div class="animation-container">
+    <img src="Funny(2).jpeg" alt="Logo Animación">
+    <h1>Bienvenido</h1>
+  </div>
+<!--logo y asi-->
+  <div class="header">
+    <div class="logo">
+      <img src="funny(2).jpeg" alt="Funny Games">
+      <span>Funny Games Company</span>
+    </div>
+    <ul class="menu">
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Sobre Nosotros</a></li>
+      <li><a href="#">Planes</a></li>
+      <li><a href="#">Contacto</a></li>
+      <li><a href="#">Descargas</a></li>
+    </ul>
+<!--donde contactarnos-->
+    <div class="buttons">
+      <a href="tel:+123456789" class="call" aria-label="Llamar a Funny Games Company">Llámanos</a>
+      <a href="https://wa.me/123456789" class="whatsapp" aria-label="Enviar mensaje por WhatsApp a Funny Games Company">Escríbenos</a>
+    </div>
+  </div>
+<!--informacion de la pagina web-->  
+  <div class="main-content">
+    <h1>Bienvenidos a Funny Games Company</h1>
+    <p>---</p>
+  </div>
+<!--informacion de los integrantes y su funcion-->
+<div class="main-content">
+    <h1>Sobre nosotros</h1>
+    <p>---</p>
+  </div>
+<!--informacion de los 3 contenedores-->
+<div class="main-content">
+    <div class="section-title">
+      <h2>Nuestros Planes</h2>
+      <p>Tenemos tres planes:</p>
+    </div>
+<!-- 1 -->
+    <div class="plans-container">
+      <div class="plan-card">
+        <h3>Apoyo a creadores indie</h3>
+        <p>agregr info.</p>
+        <ul>
+          <li>Coste de mantenimiento</li>
+          <li>$ 1</li>
+        </ul>
+      </div>
+<!-- 2 -->
+      <div class="plan-card">
+        <h3>Estilo de juegos</h3>
+        <p>---.</p>
+        <ul>
+          <li>---</li>
+          <li>---</li>
+        </ul>
+      </div>
+<!-- 3 -->
+      <div class="plan-card">
+        <h3>Apoyo personal</h3>
+        <p>---.</p>
+        <ul>
+          <li>---</li>
+          <li>---</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<!--hasta aqui-->
+  <div class="footer">
+    © 2024 Funny Games Company - Todos los derechos reservados.
+  </div>
+<!--colores del cambio de estilo-->
+  <div class="modal" id="colorModal">
+    <span>Selecciona un color:</span>
+    <div class="color-option naranja" data-bg="yellow" data-text="black"></div>
+    <div class="color-option rojo" data-bg="orange" data-text="white"></div>
+    <div class="color-option amarillo" data-bg="red" data-text="black"></div>
+    <div class="color-option azul" data-bg="blue" data-text="white"></div>
+    <div class="color-option verde" data-bg="green" data-text="white"></div>
+    <div class="color-option morado" data-bg="purple" data-text="white"></div>
+    <div class="color-option negro" data-bg="white" data-text="black"></div>
+    <div class="color-option blanco" data-bg="black" data-text="white"></div>
+    <button class="modal-close">Cerrar</button>
+  </div>
+<!--script del cambio de estilo de la pagina-->
+  <script>
+    const logo = document.querySelector('.logo');
+    const modal = document.getElementById('colorModal');
+    const colorOptions = document.querySelectorAll('.color-option');
+    const closeModal = document.querySelector('.modal-close');
+//
+    // Mostrar el modal al hacer clic en el logo
+    logo.addEventListener('click', () => {
+      modal.style.display = 'block';
+    });
+//
+    // Cambiar colores según la selección
+    modal.addEventListener('click', (e) => {
+      if (e.target.classList.contains('color-option')) {
+        const bgColor = e.target.getAttribute('data-bg');
+        const textColor = e.target.getAttribute('data-text');
+        document.body.style.backgroundColor = bgColor;
+        document.body.style.color = textColor;
+        modal.style.display = 'none';
+      }
+    });
+//
+    // Cerrar modal al hacer clic en "Cerrar"
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+//
+    // Cerrar modal al hacer clic fuera de él
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+//
+  </script>
+<!--script de la animacion al inicio de la pagina-->
+  <!-- Contenido principal para la animacion -->
+  <div class="mai">
+    <h1></h1>
+    <p></p>
+  </div>
+  <script>
+    // Esperar a que termine la animación (3 segundos en este caso)
+    setTimeout(() => {
+      // Ocultar la animación
+      document.querySelector('.animation-container').style.display = 'none';
+
+      // Mostrar el contenido principal
+      document.querySelector('.mai').style.display = 'block';
+    }, 4000);
+  </script>
+</body>
+</html>
+<!-- .jpeg .png-->
