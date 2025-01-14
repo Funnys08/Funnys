@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funny Games Company</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #08e2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-image: url('Imagenes/Fondo.jpeg');
+    background-position: center;
+}
+.login-container {
+    background-color: rgba(255, 255, 255, 0.6); 
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 10px 10px 10px rgba(206, 206, 206, 0.6);
+    width: 300px;
+    text-align: center;
+    margin-top: 125px;
+}
+.login-container h1 {
+    margin-bottom: 10px;
+}
+.login-container input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    width: 48%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.6); 
+    color: rgb(0, 0, 0);
+    border-radius: 15px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #00c1cf5e;
+}
+
+.login-container .checkbox-container {
+    text-align: left;
+}
+
+.login-container .checkbox-container input {
+    width: auto;
+    margin-right: 5px;
+}
+
+.login-container .message {
+    color: rgb(255, 0, 0);
+    display: none;
+}
+a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+</style>
+</head>
+<link rel="icon" href="Imagenes/Favicon.png" type="image/jpeg">
+<body>
+    <div class="login-container">
+        <h1>Iniciar sesión</h1>
+        <form action="BD/login.php" method="POST">
+            <input type="text" id="username" name="username" placeholder="Nombre" required>   
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Contraseña" required>
+            <div class="checkbox-container">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Recordarme</label>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <button type="submit">Login</button>
+                <button type="button" onclick="location.href='Account.html'">Account</button>
+            </div>
+        </form>
+        <button type="button" onclick="PaginTransferi()">Regresar</button>
+    </div>
+
+    <script>
+        function PaginTransferi() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
+<!-- .jpeg .png .php-->
